@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Layouts Black Friday - liveSEO</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Poppins', system-ui, sans-serif;
+  background: #111827;
+  color: #E5E7EB;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 24px;
+}
+.logo {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #9CA3AF;
+  margin-bottom: 8px;
+  letter-spacing: 0.04em;
+}
+.logo span { color: #FF9A05; font-weight: 800; }
+h1 {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 800;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 8px;
+}
+.subtitle {
+  color: #9CA3AF;
+  font-size: 1rem;
+  text-align: center;
+  margin-bottom: 48px;
+  max-width: 500px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 960px;
+  width: 100%;
+}
+.card {
+  background: #1F2937;
+  border: 1px solid #374151;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+}
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px rgba(255, 154, 5, 0.15);
+  border-color: #FF9A05;
+}
+.card-preview {
+  aspect-ratio: 16/10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.card-preview svg { width: 64px; height: 64px; opacity: 0.5; }
+.card-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+.card-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 3px 10px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  width: fit-content;
+}
+.card-body h2 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 8px;
+}
+.card-body p {
+  font-size: 0.85rem;
+  color: #9CA3AF;
+  line-height: 1.6;
+  flex: 1;
+}
+.card-cta {
+  display: block;
+  margin-top: 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #FF9A05;
+}
+.footer-note {
+  margin-top: 48px;
+  font-size: 0.8rem;
+  color: #6B7280;
+  text-align: center;
+}
+@media (max-width: 700px) {
+  .grid { grid-template-columns: 1fr; max-width: 400px; }
+  body { padding: 40px 18px; }
+}
+</style>
+</head>
+<body>
+
+<div class="logo">live<span>SEO</span></div>
+<h1>Layouts Black Friday</h1>
+<p class="subtitle">Previews dos 3 layouts disponíveis para landing pages de Black Friday.</p>
+
+<div class="grid">
+
+  <a href="vitrine.html" class="card">
+    <div class="card-preview" style="background: linear-gradient(135deg, #1a1a2e, #16213e)">
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="6" y="14" width="24" height="18" rx="3" stroke="#FF9A05" stroke-width="2"/>
+        <rect x="34" y="14" width="24" height="18" rx="3" stroke="#FF9A05" stroke-width="2"/>
+        <rect x="6" y="36" width="24" height="18" rx="3" stroke="#FF9A05" stroke-width="2"/>
+        <rect x="34" y="36" width="24" height="18" rx="3" stroke="#FF9A05" stroke-width="2"/>
+      </svg>
+    </div>
+    <div class="card-body">
+      <span class="card-tag" style="background: #1E3A5F; color: #60A5FA;">Padrão</span>
+      <h2>Vitrine</h2>
+      <p>Grid de produtos com botão "Carregar mais". Ideal para e-commerces menores com poucas categorias.</p>
+      <span class="card-cta">Ver preview &rarr;</span>
+    </div>
+  </a>
+
+  <a href="carrossel.html" class="card">
+    <div class="card-preview" style="background: linear-gradient(135deg, #003D42, #009CA6)">
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="4" y="10" width="56" height="20" rx="3" stroke="#FF9A05" stroke-width="2"/>
+        <rect x="4" y="34" width="17" height="20" rx="3" stroke="#FF9A05" stroke-width="2"/>
+        <rect x="24" y="34" width="17" height="20" rx="3" stroke="#FF9A05" stroke-width="2"/>
+        <rect x="44" y="34" width="17" height="20" rx="3" stroke="#FF9A05" stroke-width="2"/>
+        <path d="M8 44h9M24 44h9M44 44h9" stroke="#FF9A05" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="card-body">
+      <span class="card-tag" style="background: #1A3333; color: #34D399;">Categorias</span>
+      <h2>Carrossel</h2>
+      <p>Grid principal + 4 carrosséis por categoria. Para e-commerces grandes com múltiplas verticais.</p>
+      <span class="card-cta">Ver preview &rarr;</span>
+    </div>
+  </a>
+
+  <a href="ebusiness.html" class="card">
+    <div class="card-preview" style="background: linear-gradient(135deg, #0A1628, #0042D9)">
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="4" y="10" width="26" height="18" rx="3" stroke="#FF9A05" stroke-width="2"/>
+        <line x1="36" y1="14" x2="58" y2="14" stroke="#FF9A05" stroke-width="2" stroke-linecap="round"/>
+        <line x1="36" y1="20" x2="52" y2="20" stroke="#FF9A05" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+        <line x1="36" y1="24" x2="48" y2="24" stroke="#FF9A05" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+        <rect x="34" y="36" width="26" height="18" rx="3" stroke="#FF9A05" stroke-width="2"/>
+        <line x1="6" y1="40" x2="28" y2="40" stroke="#FF9A05" stroke-width="2" stroke-linecap="round"/>
+        <line x1="6" y1="46" x2="22" y2="46" stroke="#FF9A05" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+        <line x1="6" y1="50" x2="18" y2="50" stroke="#FF9A05" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+      </svg>
+    </div>
+    <div class="card-body">
+      <span class="card-tag" style="background: #1A2744; color: #A78BFA;">Serviços</span>
+      <h2>E-business</h2>
+      <p>Mostruário de serviços em blocos alternados + CTA WhatsApp. Para empresas de serviço.</p>
+      <span class="card-cta">Ver preview &rarr;</span>
+    </div>
+  </a>
+
+</div>
+
+<p class="footer-note">liveSEO &middot; Skill pagina-seo-black-friday &middot; 2026</p>
+
+</body>
+</html>

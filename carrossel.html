@@ -1,0 +1,779 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<title>Black Friday Cobasi</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FAFBFA;
+  --bg-alt: #F0F3F2;
+  --card-bg: #FFFFFF;
+  --text: #1A2A2D;
+  --text-muted: #5A6B6E;
+  --text-light: #8A9A9E;
+  --primary: #009CA6;
+  --primary-dark: #007A82;
+  --primary-darker: #003D42;
+  --secondary: #FF8200;
+  --secondary-light: #FFA033;
+  --accent-green: #7EB339;
+  --border: #D8E0DE;
+  --shadow: rgba(0,60,66,0.08);
+  --card-hover-shadow: rgba(0,60,66,0.14);
+  --header-bg: #FFFFFF;
+  --header-border: #E4EAE8;
+  --overlay: rgba(0,61,66,0.55);
+  --hero-from: #003D42;
+  --hero-to: #009CA6;
+  --footer-bg: #F0F3F2;
+}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg: #0D1F22;
+  --bg-alt: #142A2E;
+  --card-bg: #1A3338;
+  --text: #E0EAEC;
+  --text-muted: #9AACB0;
+  --text-light: #6A8088;
+  --border: #2A4448;
+  --shadow: rgba(0,0,0,0.3);
+  --card-hover-shadow: rgba(0,156,166,0.18);
+  --header-bg: #0F2226;
+  --header-border: #1E3A3E;
+  --overlay: rgba(0,0,0,0.7);
+  --footer-bg: #0F2226;
+}}
+:root[data-theme="dark"]{
+  --bg: #0D1F22;
+  --bg-alt: #142A2E;
+  --card-bg: #1A3338;
+  --text: #E0EAEC;
+  --text-muted: #9AACB0;
+  --text-light: #6A8088;
+  --border: #2A4448;
+  --shadow: rgba(0,0,0,0.3);
+  --card-hover-shadow: rgba(0,156,166,0.18);
+  --header-bg: #0F2226;
+  --header-border: #1E3A3E;
+  --overlay: rgba(0,0,0,0.7);
+  --footer-bg: #0F2226;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Montserrat',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+img,svg{display:block;max-width:100%}
+button{cursor:pointer;font-family:inherit;border:none;background:none}
+a{color:inherit;text-decoration:none}
+section[id]{scroll-margin-top:72px}
+
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+
+/* ===== HEADER ===== */
+.header{position:sticky;top:0;z-index:100;background:var(--header-bg);border-bottom:1px solid var(--header-border);backdrop-filter:blur(12px)}
+.header-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-size:1.65rem;font-weight:800;color:var(--primary);letter-spacing:-0.02em}
+.nav{display:flex;align-items:center;gap:28px}
+.nav a{font-size:0.875rem;font-weight:600;color:var(--text-muted);transition:color 0.2s}
+.nav a:hover,.nav a:focus-visible{color:var(--primary)}
+.nav-cta{background:var(--primary);color:#fff !important;padding:8px 20px;border-radius:6px;font-weight:700;transition:background 0.2s}
+.nav-cta:hover{background:var(--primary-dark)}
+.mobile-menu-btn{display:none;padding:6px;color:var(--text)}
+.nav-mobile-open{display:flex !important;flex-direction:column;position:absolute;top:64px;left:0;right:0;background:var(--header-bg);border-bottom:1px solid var(--header-border);padding:16px 24px;gap:16px;box-shadow:0 8px 24px var(--shadow)}
+
+/* ===== HERO ===== */
+.hero{position:relative;overflow:hidden;padding:80px 0 100px;text-align:center;background:linear-gradient(135deg,#003D42 0%,#005A62 35%,#009CA6 75%,#007A82 100%);background-size:200% 200%;animation:heroShift 10s ease-in-out infinite}
+@keyframes heroShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 90%,rgba(0,156,166,0.25) 0%,transparent 55%),radial-gradient(ellipse at 80% 10%,rgba(126,179,57,0.1) 0%,transparent 45%);pointer-events:none}
+.hero-content{position:relative;z-index:2}
+.hero-bf-title{font-family:Georgia,'Times New Roman',serif;font-size:clamp(3rem,8.5vw,6rem);font-weight:700;color:#fff;line-height:1.05;margin-bottom:12px;text-wrap:balance}
+.hero-subtitle{font-size:clamp(1rem,2.5vw,1.25rem);font-weight:500;color:rgba(255,255,255,0.8);margin-bottom:40px;letter-spacing:0.01em}
+.countdown{display:flex;justify-content:center;gap:12px;margin-bottom:36px;flex-wrap:wrap}
+.countdown-box{background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.14);border-radius:10px;padding:14px 18px;min-width:76px;text-align:center}
+.countdown-value{display:block;font-size:2rem;font-weight:800;color:#fff;line-height:1.15;font-variant-numeric:tabular-nums}
+.countdown-label{display:block;font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.6);margin-top:4px}
+.countdown-sep{font-size:1.6rem;font-weight:700;color:rgba(255,255,255,0.35);align-self:center;padding-bottom:18px}
+.btn-hero{display:inline-block;background:var(--secondary);color:#fff;font-size:1.05rem;font-weight:700;padding:14px 40px;border-radius:8px;transition:background 0.2s,transform 0.15s;letter-spacing:0.01em}
+.btn-hero:hover{background:#E67400;transform:translateY(-1px)}
+.hero-wave{position:absolute;bottom:-1px;left:0;right:0;z-index:3}
+.hero-wave svg{display:block;width:100%;height:auto}
+
+/* ===== SEO HEADING ===== */
+.seo-heading{padding:48px 0 8px}
+.seo-heading h1{font-size:clamp(1.35rem,3vw,1.75rem);font-weight:800;color:var(--text);line-height:1.3;text-wrap:balance}
+
+/* ===== SECTION HEADER ===== */
+.section-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:24px;gap:16px;flex-wrap:wrap}
+.section-header h2{font-size:clamp(1.25rem,2.5vw,1.6rem);font-weight:800;color:var(--text)}
+.ver-tudo-link{font-size:0.875rem;font-weight:600;color:var(--accent-green);transition:color 0.2s;white-space:nowrap}
+.ver-tudo-link:hover{color:#6A9A2E}
+
+/* ===== PRODUCT CARDS ===== */
+.product-card{background:var(--card-bg);border-radius:10px;overflow:hidden;border:1px solid var(--border);transition:box-shadow 0.25s,transform 0.2s}
+.product-card:hover{box-shadow:0 8px 28px var(--card-hover-shadow);transform:translateY(-3px)}
+.product-img{aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.product-icon{width:60px;height:60px;opacity:0.85}
+.discount-badge{position:absolute;top:10px;right:10px;background:var(--secondary);color:#fff;font-size:0.75rem;font-weight:700;padding:4px 10px;border-radius:5px;letter-spacing:0.02em}
+.product-info{padding:14px 16px 18px}
+.product-category{display:inline-block;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--primary);margin-bottom:6px}
+.product-info h3{font-size:0.95rem;font-weight:700;color:var(--text);margin-bottom:10px;line-height:1.3}
+.old-price{display:block;font-size:0.8rem;color:var(--text-light);text-decoration:line-through;margin-bottom:2px}
+.new-price{display:block;font-size:1.2rem;font-weight:800;color:var(--primary-dark);margin-bottom:14px}
+.btn-comprar{display:block;width:100%;padding:10px;background:var(--secondary);color:#fff;font-size:0.85rem;font-weight:700;border-radius:6px;text-align:center;transition:background 0.2s}
+.btn-comprar:hover{background:#E67400}
+
+/* ===== PRODUCT GRID ===== */
+.grid-section{padding:32px 0 48px}
+.product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:28px}
+.hidden-card{display:none}
+.hidden-card.visible{display:block}
+.btn-load-more{display:block;margin:0 auto;padding:12px 36px;background:transparent;border:2px solid var(--primary);color:var(--primary);font-size:0.9rem;font-weight:700;border-radius:8px;transition:background 0.2s,color 0.2s}
+.btn-load-more:hover{background:var(--primary);color:#fff}
+
+/* ===== CAROUSEL ===== */
+.carousel-section{padding:40px 0}
+.carousel-section:nth-of-type(even){background:var(--bg-alt)}
+.carousel-wrapper{position:relative;padding:0 36px}
+.carousel-viewport{overflow:hidden;border-radius:8px}
+.carousel-track{display:flex;gap:16px;transition:transform 0.45s cubic-bezier(0.25,0.1,0.25,1)}
+.carousel-card{flex:0 0 calc((100% - 48px)/4);min-width:0}
+.carousel-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:4;width:36px;height:36px;border-radius:50%;background:var(--card-bg);border:1px solid var(--border);color:var(--text-muted);display:flex;align-items:center;justify-content:center;transition:background 0.2s,color 0.2s,box-shadow 0.2s;box-shadow:0 2px 8px var(--shadow)}
+.carousel-arrow:hover{background:var(--primary);color:#fff;border-color:var(--primary)}
+.carousel-arrow:disabled{opacity:0.3;pointer-events:none}
+.carousel-arrow.prev{left:0}
+.carousel-arrow.next{right:0}
+.carousel-dots{display:flex;justify-content:center;gap:8px;margin-top:20px}
+.carousel-dot{width:8px;height:8px;border-radius:50%;background:var(--border);border:none;padding:0;transition:background 0.2s,transform 0.2s}
+.carousel-dot.active{background:var(--primary);transform:scale(1.3)}
+
+/* ===== FAQ ===== */
+.faq-section{padding:56px 0}
+.faq-section h2{font-size:clamp(1.25rem,2.5vw,1.6rem);font-weight:800;margin-bottom:28px}
+.faq-list{max-width:800px}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-item:first-child{border-top:1px solid var(--border)}
+.faq-question{display:flex;align-items:center;justify-content:space-between;width:100%;padding:18px 0;text-align:left;font-size:0.95rem;font-weight:600;color:var(--text);gap:16px;transition:color 0.2s}
+.faq-question:hover{color:var(--primary)}
+.faq-chevron{flex-shrink:0;transition:transform 0.3s}
+.faq-item.open .faq-chevron{transform:rotate(180deg)}
+.faq-answer{max-height:0;overflow:hidden;transition:max-height 0.35s ease}
+.faq-item.open .faq-answer{max-height:300px}
+.faq-answer p{padding:0 0 18px;font-size:0.9rem;color:var(--text-muted);line-height:1.7}
+
+/* ===== CATEGORY TEXT ===== */
+.cattext-section{padding:48px 0 56px;background:var(--bg-alt)}
+.cattext-section h2{font-size:clamp(1.15rem,2.2vw,1.4rem);font-weight:800;margin-bottom:20px}
+.cattext-body p{font-size:0.9rem;color:var(--text-muted);line-height:1.75;margin-bottom:14px;max-width:75ch}
+.cattext-hidden{display:none}
+.cattext-hidden.visible{display:block}
+.btn-ver-mais{margin-top:4px;padding:0;background:none;border:none;color:var(--primary);font-size:0.875rem;font-weight:700;cursor:pointer;transition:color 0.2s}
+.btn-ver-mais:hover{color:var(--primary-dark)}
+
+/* ===== FOOTER ===== */
+.site-footer{background:var(--footer-bg);border-top:1px solid var(--border);padding:48px 0 0}
+.footer-top{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:32px;padding-bottom:36px}
+.footer-brand .logo{margin-bottom:12px}
+.footer-brand p{font-size:0.85rem;color:var(--text-muted);line-height:1.6;max-width:260px}
+.footer-col h4{font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text);margin-bottom:14px}
+.footer-col ul{list-style:none}
+.footer-col li{margin-bottom:8px}
+.footer-col a{font-size:0.85rem;color:var(--text-muted);transition:color 0.2s}
+.footer-col a:hover{color:var(--primary)}
+.footer-badges{display:flex;gap:24px;padding:20px 0;border-top:1px solid var(--border);flex-wrap:wrap}
+.footer-badge{display:flex;align-items:center;gap:8px;font-size:0.8rem;font-weight:600;color:var(--text-muted)}
+.footer-badge svg{flex-shrink:0}
+.footer-bottom{text-align:center;padding:16px 0;border-top:1px solid var(--border);font-size:0.78rem;color:var(--text-light)}
+
+/* ===== MODAL ===== */
+.modal-overlay{display:none;position:fixed;inset:0;z-index:200;background:var(--overlay);align-items:center;justify-content:center;padding:24px}
+.modal-overlay.open{display:flex}
+.modal-box{background:var(--card-bg);border-radius:14px;padding:36px 32px;max-width:440px;width:100%;position:relative;box-shadow:0 20px 60px rgba(0,0,0,0.25)}
+.modal-close{position:absolute;top:14px;right:14px;padding:4px;color:var(--text-muted);transition:color 0.2s}
+.modal-close:hover{color:var(--text)}
+.modal-box h3{font-size:1.2rem;font-weight:800;margin-bottom:6px;color:var(--text)}
+.modal-box p{font-size:0.875rem;color:var(--text-muted);margin-bottom:24px}
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-size:0.78rem;font-weight:600;color:var(--text-muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:0.04em}
+.form-group input{width:100%;padding:11px 14px;border:1px solid var(--border);border-radius:7px;font-size:0.9rem;font-family:inherit;background:var(--bg);color:var(--text);transition:border-color 0.2s}
+.form-group input:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(0,156,166,0.12)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.btn-submit{width:100%;padding:13px;background:var(--primary);color:#fff;font-size:0.95rem;font-weight:700;border-radius:8px;margin-top:8px;transition:background 0.2s}
+.btn-submit:hover{background:var(--primary-dark)}
+
+/* ===== DEMO RIBBON ===== */
+.demo-ribbon{position:fixed;bottom:0;left:0;right:0;z-index:150;background:var(--primary-darker);color:rgba(255,255,255,0.85);text-align:center;padding:10px 24px;font-size:0.78rem;font-weight:600;letter-spacing:0.02em}
+.demo-ribbon span{color:var(--secondary);font-weight:800}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:1023px){
+  .product-grid{grid-template-columns:repeat(2,1fr);gap:16px}
+  .carousel-card{flex:0 0 calc((100% - 16px)/2)}
+  .footer-top{grid-template-columns:1fr 1fr;gap:24px}
+}
+@media(max-width:767px){
+  .nav{display:none}
+  .mobile-menu-btn{display:block}
+  .hero{padding:56px 0 80px}
+  .hero-bf-title{font-size:clamp(2.4rem,10vw,3.6rem)}
+  .countdown-box{min-width:62px;padding:10px 12px}
+  .countdown-value{font-size:1.5rem}
+  .product-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+  .product-info{padding:10px 12px 14px}
+  .product-info h3{font-size:0.85rem}
+  .new-price{font-size:1.05rem}
+  .carousel-wrapper{padding:0 30px}
+  .carousel-card{flex:0 0 82%}
+  .carousel-arrow{width:28px;height:28px}
+  .footer-top{grid-template-columns:1fr;gap:20px}
+  .form-row{grid-template-columns:1fr}
+  .section-header h2{font-size:1.15rem}
+}
+@media(prefers-reduced-motion:reduce){
+  .hero{animation:none}
+  .carousel-track{transition:none}
+  html{scroll-behavior:auto}
+  .faq-answer{transition:none}
+}
+</style>
+
+<!-- ===== HEADER ===== -->
+<header class="header">
+  <div class="container header-inner">
+    <a class="logo" href="#">cobasi</a>
+    <nav class="nav" id="main-nav">
+      <a href="#carousel-cachorro">Cachorro</a>
+      <a href="#carousel-gato">Gato</a>
+      <a href="#carousel-aves">Aves</a>
+      <a href="#carousel-jardim">Casa &amp; Jardim</a>
+      <a href="#grid" class="nav-cta">Ver ofertas</a>
+    </nav>
+    <button class="mobile-menu-btn" id="menu-btn" aria-label="Abrir menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-content container">
+    <p class="hero-bf-title">Black Friday Cobasi</p>
+    <p class="hero-subtitle">Descontos exclusivos em todas as categorias pet</p>
+    <div class="countdown" id="countdown">
+      <div class="countdown-box"><span class="countdown-value" id="cd-days">00</span><span class="countdown-label">dias</span></div>
+      <span class="countdown-sep">:</span>
+      <div class="countdown-box"><span class="countdown-value" id="cd-hours">00</span><span class="countdown-label">horas</span></div>
+      <span class="countdown-sep">:</span>
+      <div class="countdown-box"><span class="countdown-value" id="cd-mins">00</span><span class="countdown-label">min</span></div>
+      <span class="countdown-sep">:</span>
+      <div class="countdown-box"><span class="countdown-value" id="cd-secs">00</span><span class="countdown-label">seg</span></div>
+    </div>
+    <button class="btn-hero" id="btn-avise">Avise-me</button>
+  </div>
+  <div class="hero-wave"><svg viewBox="0 0 1440 70" preserveAspectRatio="none" style="width:100%;height:auto"><path d="M0,45 C360,80 720,5 1080,45 C1260,62 1380,35 1440,38 L1440,70 L0,70Z" fill="var(--bg)"/></svg></div>
+</section>
+
+<main>
+
+<!-- ===== H1 SEO ===== -->
+<section class="seo-heading">
+  <div class="container">
+    <h1>Black Friday Pet Shop Cobasi: ofertas imperdíveis</h1>
+  </div>
+</section>
+
+<!-- ===== PRODUCT GRID ===== -->
+<section class="grid-section" id="grid">
+  <div class="container">
+    <div class="section-header"><h2>Todas as ofertas</h2></div>
+    <div class="product-grid" id="product-grid">
+
+      <div class="product-card">
+        <div class="product-img" style="background:#007A82"><svg class="product-icon" viewBox="0 0 60 60"><circle cx="30" cy="38" r="11" fill="rgba(255,255,255,.3)"/><circle cx="19" cy="23" r="6" fill="rgba(255,255,255,.3)"/><circle cx="30" cy="17" r="6" fill="rgba(255,255,255,.3)"/><circle cx="41" cy="23" r="6" fill="rgba(255,255,255,.3)"/></svg><span class="discount-badge">-32%</span></div>
+        <div class="product-info"><span class="product-category">Cachorro</span><h3>Ração Premium Cães</h3><span class="old-price">R$ 189,90</span><span class="new-price">R$ 129,90</span><button class="btn-comprar">Comprar</button></div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img" style="background:#008B94"><svg class="product-icon" viewBox="0 0 60 60"><circle cx="30" cy="36" r="13" fill="rgba(255,255,255,.3)"/><polygon points="19,30 15,12 27,24" fill="rgba(255,255,255,.3)"/><polygon points="41,30 45,12 33,24" fill="rgba(255,255,255,.3)"/><circle cx="25" cy="33" r="2" fill="rgba(255,255,255,.5)"/><circle cx="35" cy="33" r="2" fill="rgba(255,255,255,.5)"/></svg><span class="discount-badge">-31%</span></div>
+        <div class="product-info"><span class="product-category">Gato</span><h3>Ração Gatos Castrados</h3><span class="old-price">R$ 159,90</span><span class="new-price">R$ 109,90</span><button class="btn-comprar">Comprar</button></div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img" style="background:#005F66"><svg class="product-icon" viewBox="0 0 60 60"><circle cx="30" cy="38" r="11" fill="rgba(255,255,255,.3)"/><circle cx="19" cy="23" r="6" fill="rgba(255,255,255,.3)"/><circle cx="30" cy="17" r="6" fill="rgba(255,255,255,.3)"/><circle cx="41" cy="23" r="6" fill="rgba(255,255,255,.3)"/></svg><span class="discount-badge">-33%</span></div>
+        <div class="product-info"><span class="product-category">Cachorro</span><h3>Coleira Antipulgas</h3><span class="old-price">R$ 89,90</span><span class="new-price">R$ 59,90</span><button class="btn-comprar">Comprar</button></div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img" style="background:#009CA6"><svg class="product-icon" viewBox="0 0 60 60"><circle cx="30" cy="38" r="11" fill="rgba(255,255,255,.3)"/><circle cx="19" cy="23" r="6" fill="rgba(255,255,255,.3)"/><circle cx="30" cy="17" r="6" fill="rgba(255,255,255,.3)"/><circle cx="41" cy="23" r="6" fill="rgba(255,255,255,.3)"/></svg><span class="discount-badge">-40%</span></div>
+        <div class="product-info"><span class="product-category">Cachorro</span><h3>Brinquedo Interativo</h3><span class="old-price">R$ 49,90</span><span class="new-price">R$ 29,90</span><button class="btn-comprar">Comprar</button></div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img" style="background:#006B74"><svg class="product-icon" viewBox="0 0 60 60"><circle cx="30" cy="38" r="11" fill="rgba(255,255,255,.3)"/><circle cx="19" cy="23" r="6" fill="rgba(255,255,255,.3)"/><circle cx="30" cy="17" r="6" fill="rgba(255,255,255,.3)"/><circle cx="41" cy="23" r="6" fill="rgba(255,255,255,.3)"/></svg><span class="discount-badge">-32%</span></div>
+        <div class="product-info"><span class="product-category">Cachorro</span><h3>Cama Pet Grande</h3><span class="old-price">R$ 249,90</span><span class="new-price">R$ 169,90</span><button class="btn-comprar">Comprar</button></div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img" style="background:#007E88"><svg class="product-icon" viewBox="0 0 60 60"><circle cx="30" cy="36" r="13" fill="rgba(255,255,255,.3)"/><polygon points="19,30 15,12 27,24" fill="rgba(255,255,255,.3)"/><polygon points="41,30 45,12 33,24" fill="rgba(255,255,255,.3)"/><circle cx="25" cy="33" r="2" fill="rgba(255,255,255,.5)"/><circle cx="35" cy="33" r="2" fill="rgba(255,255,255,.5)"/></svg><span class="discount-badge">-38%</span></div>
+        <div class="product-info"><span class="product-category">Gato</span><h3>Areia Sanitária</h3><span class="old-price">R$ 39,90</span><span class="new-price">R$ 24,90</span><button class="btn-comprar">Comprar</button></div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img" style="background:#005A62"><svg class="product-icon" viewBox="0 0 60 60"><ellipse cx="32" cy="30" rx="15" ry="10" fill="rgba(255,255,255,.3)"/><polygon points="17,30 7,20 7,40" fill="rgba(255,255,255,.3)"/><circle cx="39" cy="28" r="2" fill="rgba(255,255,255,.5)"/></svg><span class="discount-badge">-30%</span></div>
+        <div class="product-info"><span class="product-category">Aquário</span><h3>Aquário Completo</h3><span class="old-price">R$ 399,90</span><span class="new-price">R$ 279,90</span><button class="btn-comprar">Comprar</button></div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img" style="background:#008490"><svg class="product-icon" viewBox="0 0 60 60"><circle cx="30" cy="38" r="11" fill="rgba(255,255,255,.3)"/><circle cx="19" cy="23" r="6" fill="rgba(255,255,255,.3)"/><circle cx="30" cy="17" r="6" fill="rgba(255,255,255,.3)"/><circle cx="41" cy="23" r="6" fill="rgba(255,255,255,.3)"/></svg><span class="discount-badge">-30%</span></div>
+        <div class="product-info"><span class="product-category">Cachorro</span><h3>Comedouro Automático</h3><span class="old-price">R$ 199,90</span><span class="new-price">R$ 139,90</span><button class="btn-comprar">Comprar</button></div>
+      </div>
+
+      <div class="product-card hidden-card">
+        <div class="product-img" style="background:#00727C"><svg class="product-icon" viewBox="0 0 60 60"><circle cx="30" cy="38" r="11" fill="rgba(255,255,255,.3)"/><circle cx="19" cy="23" r="6" fill="rgba(255,255,255,.3)"/><circle cx="30" cy="17" r="6" fill="rgba(255,255,255,.3)"/><circle cx="41" cy="23" r="6" fill="rgba(255,255,255,.3)"/></svg><span class="discount-badge">-43%</span></div>
+        <div class="product-info"><span class="product-category">Cachorro</span><h3>Shampoo Neutro</h3><span class="old-price">R$ 34,90</span><span class="new-price">R$ 19,90</span><button class="btn-comprar">Comprar</button></div>
+      </div>
+
+      <div class="product-card hidden-card">
+        <div class="product-img" style="background:#007A82"><svg class="product-icon" viewBox="0 0 60 60"><rect x="19" y="26" width="22" height="8" rx="2" fill="rgba(255,255,255,.3)"/><circle cx="19" cy="22" r="6" fill="rgba(255,255,255,.3)"/><circle cx="19" cy="38" r="6" fill="rgba(255,255,255,.3)"/><circle cx="41" cy="22" r="6" fill="rgba(255,255,255,.3)"/><circle cx="41" cy="38" r="6" fill="rgba(255,255,255,.3)"/></svg><span class="discount-badge">-40%</span></div>
+        <div class="product-info"><span class="product-category">Cachorro</span><h3>Osso Natural</h3><span class="old-price">R$ 24,90</span><span class="new-price">R$ 14,90</span><button class="btn-comprar">Comprar</button></div>
+      </div>
+
+      <div class="product-card hidden-card">
+        <div class="product-img" style="background:#006068"><svg class="product-icon" viewBox="0 0 60 60"><ellipse cx="28" cy="32" rx="14" ry="9" fill="rgba(255,255,255,.3)"/><polygon points="42,30 52,26 42,34" fill="rgba(255,255,255,.3)"/><circle cx="36" cy="30" r="2" fill="rgba(255,255,255,.5)"/><path d="M22,24 Q16,16 24,20" stroke="rgba(255,255,255,.3)" fill="none" stroke-width="2"/></svg><span class="discount-badge">-33%</span></div>
+        <div class="product-info"><span class="product-category">Aves</span><h3>Gaiola Pássaro</h3><span class="old-price">R$ 179,90</span><span class="new-price">R$ 119,90</span><button class="btn-comprar">Comprar</button></div>
+      </div>
+
+      <div class="product-card hidden-card">
+        <div class="product-img" style="background:#009298"><svg class="product-icon" viewBox="0 0 60 60"><circle cx="30" cy="36" r="13" fill="rgba(255,255,255,.3)"/><polygon points="19,30 15,12 27,24" fill="rgba(255,255,255,.3)"/><polygon points="41,30 45,12 33,24" fill="rgba(255,255,255,.3)"/><circle cx="25" cy="33" r="2" fill="rgba(255,255,255,.5)"/><circle cx="35" cy="33" r="2" fill="rgba(255,255,255,.5)"/></svg><span class="discount-badge">-33%</span></div>
+        <div class="product-info"><span class="product-category">Gato</span><h3>Arranhador Gato</h3><span class="old-price">R$ 299,90</span><span class="new-price">R$ 199,90</span><button class="btn-comprar">Comprar</button></div>
+      </div>
+
+    </div>
+    <button class="btn-load-more" id="btn-load-more">Carregar mais</button>
+  </div>
+</section>
+
+<!-- ===== CAROUSEL: CACHORRO ===== -->
+<section class="carousel-section" id="carousel-cachorro">
+  <div class="container">
+    <div class="section-header"><h2>Cachorro</h2><a href="#" class="ver-tudo-link">Ver tudo &rarr;</a></div>
+    <div class="carousel-wrapper">
+      <button class="carousel-arrow prev" data-carousel="cachorro" aria-label="Anterior"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M13 4L7 10L13 16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <div class="carousel-viewport">
+        <div class="carousel-track" id="track-cachorro">
+          <div class="carousel-card product-card">
+            <div class="product-img" style="background:#007A82"><svg class="product-icon" viewBox="0 0 60 60"><circle cx="30" cy="38" r="11" fill="rgba(255,255,255,.3)"/><circle cx="19" cy="23" r="6" fill="rgba(255,255,255,.3)"/><circle cx="30" cy="17" r="6" fill="rgba(255,255,255,.3)"/><circle cx="41" cy="23" r="6" fill="rgba(255,255,255,.3)"/></svg><span class="discount-badge">-29%</span></div>
+            <div class="product-info"><span class="product-category">Cachorro</span><h3>Ração Golden</h3><span class="old-price">R$ 169,90</span><span class="new-price">R$ 119,90</span><button class="btn-comprar">Comprar</button></div>
+          </div>
+          <div class="carousel-card product-card">
+            <div class="product-img" style="background:#005F66"><svg class="product-icon" viewBox="0 0 60 60"><rect x="19" y="26" width="22" height="8" rx="2" fill="rgba(255,255,255,.3)"/><circle cx="19" cy="22" r="6" fill="rgba(255,255,255,.3)"/><circle cx="19" cy="38" r="6" fill="rgba(255,255,255,.3)"/><circle cx="41" cy="22" r="6" fill="rgba(255,255,255,.3)"/><circle cx="41" cy="38" r="6" fill="rgba(255,255,255,.3)"/></svg><span class="discount-badge">-40%</span></div>
+            <div class="product-info"><span class="product-category">Cachorro</span><h3>Petisco Dental</h3><span class="old-price">R$ 29,90</span><span class="new-price">R$ 17,90</span><button class="btn-comprar">Comprar</button></div>
+          </div>
+          <div class="carousel-card product-card">
+            <div class="product-img" style="background:#009CA6"><svg class="product-icon" viewBox="0 0 60 60"><circle cx="30" cy="38" r="11" fill="rgba(255,255,255,.3)"/><circle cx="19" cy="23" r="6" fill="rgba(255,255,255,.3)"/><circle cx="30" cy="17" r="6" fill="rgba(255,255,255,.3)"/><circle cx="41" cy="23" r="6" fill="rgba(255,255,255,.3)"/></svg><span class="discount-badge">-33%</span></div>
+            <div class="product-info"><span class="product-category">Cachorro</span><h3>Coleira LED</h3><span class="old-price">R$ 59,90</span><span class="new-price">R$ 39,90</span><button class="btn-comprar">Comprar</button></div>
+          </div>
+          <div class="carousel-card product-card">
+            <div class="product-img" style="background:#008490"><svg class="product-icon" viewBox="0 0 60 60"><circle cx="30" cy="38" r="11" fill="rgba(255,255,255,.3)"/><circle cx="19" cy="23" r="6" fill="rgba(255,255,255,.3)"/><circle cx="30" cy="17" r="6" fill="rgba(255,255,255,.3)"/><circle cx="41" cy="23" r="6" fill="rgba(255,255,255,.3)"/></svg><span class="discount-badge">-36%</span></div>
+            <div class="product-info"><span class="product-category">Cachorro</span><h3>Tapete Higiênico</h3><span class="old-price">R$ 69,90</span><span class="new-price">R$ 44,90</span><button class="btn-comprar">Comprar</button></div>
+          </div>
+          <div class="carousel-card product-card">
+            <div class="product-img" style="background:#006B74"><svg class="product-icon" viewBox="0 0 60 60"><rect x="19" y="26" width="22" height="8" rx="2" fill="rgba(255,255,255,.3)"/><circle cx="19" cy="22" r="6" fill="rgba(255,255,255,.3)"/><circle cx="19" cy="38" r="6" fill="rgba(255,255,255,.3)"/><circle cx="41" cy="22" r="6" fill="rgba(255,255,255,.3)"/><circle cx="41" cy="38" r="6" fill="rgba(255,255,255,.3)"/></svg><span class="discount-badge">-34%</span></div>
+            <div class="product-info"><span class="product-category">Cachorro</span><h3>Brinquedo Mordedor</h3><span class="old-price">R$ 34,90</span><span class="new-price">R$ 22,90</span><button class="btn-comprar">Comprar</button></div>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-arrow next" data-carousel="cachorro" aria-label="Próximo"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M7 4L13 10L7 16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+    <div class="carousel-dots" id="dots-cachorro"></div>
+  </div>
+</section>
+
+<!-- ===== CAROUSEL: GATO ===== -->
+<section class="carousel-section" id="carousel-gato">
+  <div class="container">
+    <div class="section-header"><h2>Gato</h2><a href="#" class="ver-tudo-link">Ver tudo &rarr;</a></div>
+    <div class="carousel-wrapper">
+      <button class="carousel-arrow prev" data-carousel="gato" aria-label="Anterior"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M13 4L7 10L13 16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <div class="carousel-viewport">
+        <div class="carousel-track" id="track-gato">
+          <div class="carousel-card product-card">
+            <div class="product-img" style="background:#008B94"><svg class="product-icon" viewBox="0 0 60 60"><circle cx="30" cy="36" r="13" fill="rgba(255,255,255,.3)"/><polygon points="19,30 15,12 27,24" fill="rgba(255,255,255,.3)"/><polygon points="41,30 45,12 33,24" fill="rgba(255,255,255,.3)"/><circle cx="25" cy="33" r="2" fill="rgba(255,255,255,.5)"/><circle cx="35" cy="33" r="2" fill="rgba(255,255,255,.5)"/></svg><span class="discount-badge">-33%</span></div>
+            <div class="product-info"><span class="product-category">Gato</span><h3>Ração Whiskas</h3><span class="old-price">R$ 89,90</span><span class="new-price">R$ 59,90</span><button class="btn-comprar">Comprar</button></div>
+          </div>
+          <div class="carousel-card product-card">
+            <div class="product-img" style="background:#007E88"><svg class="product-icon" viewBox="0 0 60 60"><circle cx="30" cy="36" r="13" fill="rgba(255,255,255,.3)"/><polygon points="19,30 15,12 27,24" fill="rgba(255,255,255,.3)"/><polygon points="41,30 45,12 33,24" fill="rgba(255,255,255,.3)"/><circle cx="25" cy="33" r="2" fill="rgba(255,255,255,.5)"/><circle cx="35" cy="33" r="2" fill="rgba(255,255,255,.5)"/></svg><span class="discount-badge">-34%</span></div>
+            <div class="product-info"><span class="product-category">Gato</span><h3>Areia Biodegradável</h3><span class="old-price">R$ 49,90</span><span class="new-price">R$ 32,90</span><button class="btn-comprar">Comprar</button></div>
+          </div>
+          <div class="carousel-card product-card">
+            <div class="product-img" style="background:#009298"><svg class="product-icon" viewBox="0 0 60 60"><circle cx="30" cy="36" r="13" fill="rgba(255,255,255,.3)"/><polygon points="19,30 15,12 27,24" fill="rgba(255,255,255,.3)"/><polygon points="41,30 45,12 33,24" fill="rgba(255,255,255,.3)"/><circle cx="25" cy="33" r="2" fill="rgba(255,255,255,.5)"/><circle cx="35" cy="33" r="2" fill="rgba(255,255,255,.5)"/></svg><span class="discount-badge">-34%</span></div>
+            <div class="product-info"><span class="product-category">Gato</span><h3>Arranhador Torre</h3><span class="old-price">R$ 349,90</span><span class="new-price">R$ 229,90</span><button class="btn-comprar">Comprar</button></div>
+          </div>
+          <div class="carousel-card product-card">
+            <div class="product-img" style="background:#006B74"><svg class="product-icon" viewBox="0 0 60 60"><circle cx="30" cy="36" r="13" fill="rgba(255,255,255,.3)"/><polygon points="19,30 15,12 27,24" fill="rgba(255,255,255,.3)"/><polygon points="41,30 45,12 33,24" fill="rgba(255,255,255,.3)"/><circle cx="25" cy="33" r="2" fill="rgba(255,255,255,.5)"/><circle cx="35" cy="33" r="2" fill="rgba(255,255,255,.5)"/></svg><span class="discount-badge">-34%</span></div>
+            <div class="product-info"><span class="product-category">Gato</span><h3>Sachê Premium</h3><span class="old-price">R$ 5,90</span><span class="new-price">R$ 3,90</span><button class="btn-comprar">Comprar</button></div>
+          </div>
+          <div class="carousel-card product-card">
+            <div class="product-img" style="background:#008B94"><svg class="product-icon" viewBox="0 0 60 60"><circle cx="30" cy="36" r="13" fill="rgba(255,255,255,.3)"/><polygon points="19,30 15,12 27,24" fill="rgba(255,255,255,.3)"/><polygon points="41,30 45,12 33,24" fill="rgba(255,255,255,.3)"/><circle cx="25" cy="33" r="2" fill="rgba(255,255,255,.5)"/><circle cx="35" cy="33" r="2" fill="rgba(255,255,255,.5)"/></svg><span class="discount-badge">-37%</span></div>
+            <div class="product-info"><span class="product-category">Gato</span><h3>Brinquedo Laser</h3><span class="old-price">R$ 39,90</span><span class="new-price">R$ 24,90</span><button class="btn-comprar">Comprar</button></div>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-arrow next" data-carousel="gato" aria-label="Próximo"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M7 4L13 10L7 16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+    <div class="carousel-dots" id="dots-gato"></div>
+  </div>
+</section>
+
+<!-- ===== CAROUSEL: AVES & ROEDORES ===== -->
+<section class="carousel-section" id="carousel-aves">
+  <div class="container">
+    <div class="section-header"><h2>Aves &amp; Roedores</h2><a href="#" class="ver-tudo-link">Ver tudo &rarr;</a></div>
+    <div class="carousel-wrapper">
+      <button class="carousel-arrow prev" data-carousel="aves" aria-label="Anterior"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M13 4L7 10L13 16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <div class="carousel-viewport">
+        <div class="carousel-track" id="track-aves">
+          <div class="carousel-card product-card">
+            <div class="product-img" style="background:#006068"><svg class="product-icon" viewBox="0 0 60 60"><ellipse cx="28" cy="32" rx="14" ry="9" fill="rgba(255,255,255,.3)"/><polygon points="42,30 52,26 42,34" fill="rgba(255,255,255,.3)"/><circle cx="36" cy="30" r="2" fill="rgba(255,255,255,.5)"/><path d="M22,24 Q16,16 24,20" stroke="rgba(255,255,255,.3)" fill="none" stroke-width="2"/></svg><span class="discount-badge">-31%</span></div>
+            <div class="product-info"><span class="product-category">Aves</span><h3>Gaiola Grande</h3><span class="old-price">R$ 289,90</span><span class="new-price">R$ 199,90</span><button class="btn-comprar">Comprar</button></div>
+          </div>
+          <div class="carousel-card product-card">
+            <div class="product-img" style="background:#00727C"><svg class="product-icon" viewBox="0 0 60 60"><ellipse cx="28" cy="32" rx="14" ry="9" fill="rgba(255,255,255,.3)"/><polygon points="42,30 52,26 42,34" fill="rgba(255,255,255,.3)"/><circle cx="36" cy="30" r="2" fill="rgba(255,255,255,.5)"/><path d="M22,24 Q16,16 24,20" stroke="rgba(255,255,255,.3)" fill="none" stroke-width="2"/></svg><span class="discount-badge">-34%</span></div>
+            <div class="product-info"><span class="product-category">Aves</span><h3>Ração Calopsita</h3><span class="old-price">R$ 34,90</span><span class="new-price">R$ 22,90</span><button class="btn-comprar">Comprar</button></div>
+          </div>
+          <div class="carousel-card product-card">
+            <div class="product-img" style="background:#005A62"><svg class="product-icon" viewBox="0 0 60 60"><ellipse cx="28" cy="32" rx="14" ry="9" fill="rgba(255,255,255,.3)"/><polygon points="42,30 52,26 42,34" fill="rgba(255,255,255,.3)"/><circle cx="36" cy="30" r="2" fill="rgba(255,255,255,.5)"/><path d="M22,24 Q16,16 24,20" stroke="rgba(255,255,255,.3)" fill="none" stroke-width="2"/></svg><span class="discount-badge">-30%</span></div>
+            <div class="product-info"><span class="product-category">Aves</span><h3>Bebedouro Automático</h3><span class="old-price">R$ 49,90</span><span class="new-price">R$ 34,90</span><button class="btn-comprar">Comprar</button></div>
+          </div>
+          <div class="carousel-card product-card">
+            <div class="product-img" style="background:#006B74"><svg class="product-icon" viewBox="0 0 60 60"><ellipse cx="28" cy="32" rx="14" ry="9" fill="rgba(255,255,255,.3)"/><polygon points="42,30 52,26 42,34" fill="rgba(255,255,255,.3)"/><circle cx="36" cy="30" r="2" fill="rgba(255,255,255,.5)"/><path d="M22,24 Q16,16 24,20" stroke="rgba(255,255,255,.3)" fill="none" stroke-width="2"/></svg><span class="discount-badge">-33%</span></div>
+            <div class="product-info"><span class="product-category">Aves</span><h3>Poleiro Natural</h3><span class="old-price">R$ 29,90</span><span class="new-price">R$ 19,90</span><button class="btn-comprar">Comprar</button></div>
+          </div>
+          <div class="carousel-card product-card">
+            <div class="product-img" style="background:#007A82"><svg class="product-icon" viewBox="0 0 60 60"><ellipse cx="28" cy="32" rx="14" ry="9" fill="rgba(255,255,255,.3)"/><polygon points="42,30 52,26 42,34" fill="rgba(255,255,255,.3)"/><circle cx="36" cy="30" r="2" fill="rgba(255,255,255,.5)"/><path d="M22,24 Q16,16 24,20" stroke="rgba(255,255,255,.3)" fill="none" stroke-width="2"/></svg><span class="discount-badge">-35%</span></div>
+            <div class="product-info"><span class="product-category">Aves</span><h3>Mistura de Sementes</h3><span class="old-price">R$ 19,90</span><span class="new-price">R$ 12,90</span><button class="btn-comprar">Comprar</button></div>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-arrow next" data-carousel="aves" aria-label="Próximo"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M7 4L13 10L7 16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+    <div class="carousel-dots" id="dots-aves"></div>
+  </div>
+</section>
+
+<!-- ===== CAROUSEL: CASA & JARDIM ===== -->
+<section class="carousel-section" id="carousel-jardim">
+  <div class="container">
+    <div class="section-header"><h2>Casa &amp; Jardim</h2><a href="#" class="ver-tudo-link">Ver tudo &rarr;</a></div>
+    <div class="carousel-wrapper">
+      <button class="carousel-arrow prev" data-carousel="jardim" aria-label="Anterior"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M13 4L7 10L13 16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <div class="carousel-viewport">
+        <div class="carousel-track" id="track-jardim">
+          <div class="carousel-card product-card">
+            <div class="product-img" style="background:#4E8A2E"><svg class="product-icon" viewBox="0 0 60 60"><path d="M30,12 Q46,30 30,50 Q14,30 30,12Z" fill="rgba(255,255,255,.3)"/><path d="M30,16 L30,46" stroke="rgba(255,255,255,.2)" stroke-width="1.5" fill="none"/><path d="M30,26 L22,22" stroke="rgba(255,255,255,.2)" stroke-width="1.5" fill="none"/><path d="M30,36 L38,32" stroke="rgba(255,255,255,.2)" stroke-width="1.5" fill="none"/></svg><span class="discount-badge">-33%</span></div>
+            <div class="product-info"><span class="product-category">Jardim</span><h3>Kit Jardinagem</h3><span class="old-price">R$ 89,90</span><span class="new-price">R$ 59,90</span><button class="btn-comprar">Comprar</button></div>
+          </div>
+          <div class="carousel-card product-card">
+            <div class="product-img" style="background:#5A9A3E"><svg class="product-icon" viewBox="0 0 60 60"><path d="M30,12 Q46,30 30,50 Q14,30 30,12Z" fill="rgba(255,255,255,.3)"/><path d="M30,16 L30,46" stroke="rgba(255,255,255,.2)" stroke-width="1.5" fill="none"/><path d="M30,26 L22,22" stroke="rgba(255,255,255,.2)" stroke-width="1.5" fill="none"/><path d="M30,36 L38,32" stroke="rgba(255,255,255,.2)" stroke-width="1.5" fill="none"/></svg><span class="discount-badge">-33%</span></div>
+            <div class="product-info"><span class="product-category">Jardim</span><h3>Fertilizante NPK</h3><span class="old-price">R$ 29,90</span><span class="new-price">R$ 19,90</span><button class="btn-comprar">Comprar</button></div>
+          </div>
+          <div class="carousel-card product-card">
+            <div class="product-img" style="background:#3D7A22"><svg class="product-icon" viewBox="0 0 60 60"><path d="M30,12 Q46,30 30,50 Q14,30 30,12Z" fill="rgba(255,255,255,.3)"/><path d="M30,16 L30,46" stroke="rgba(255,255,255,.2)" stroke-width="1.5" fill="none"/><path d="M30,26 L22,22" stroke="rgba(255,255,255,.2)" stroke-width="1.5" fill="none"/><path d="M30,36 L38,32" stroke="rgba(255,255,255,.2)" stroke-width="1.5" fill="none"/></svg><span class="discount-badge">-36%</span></div>
+            <div class="product-info"><span class="product-category">Jardim</span><h3>Vaso Autoirrigável</h3><span class="old-price">R$ 69,90</span><span class="new-price">R$ 44,90</span><button class="btn-comprar">Comprar</button></div>
+          </div>
+          <div class="carousel-card product-card">
+            <div class="product-img" style="background:#4E8A2E"><svg class="product-icon" viewBox="0 0 60 60"><path d="M30,12 Q46,30 30,50 Q14,30 30,12Z" fill="rgba(255,255,255,.3)"/><path d="M30,16 L30,46" stroke="rgba(255,255,255,.2)" stroke-width="1.5" fill="none"/><path d="M30,26 L22,22" stroke="rgba(255,255,255,.2)" stroke-width="1.5" fill="none"/><path d="M30,36 L38,32" stroke="rgba(255,255,255,.2)" stroke-width="1.5" fill="none"/></svg><span class="discount-badge">-36%</span></div>
+            <div class="product-info"><span class="product-category">Jardim</span><h3>Semente Gramado</h3><span class="old-price">R$ 24,90</span><span class="new-price">R$ 15,90</span><button class="btn-comprar">Comprar</button></div>
+          </div>
+          <div class="carousel-card product-card">
+            <div class="product-img" style="background:#5A9A3E"><svg class="product-icon" viewBox="0 0 60 60"><path d="M30,12 Q46,30 30,50 Q14,30 30,12Z" fill="rgba(255,255,255,.3)"/><path d="M30,16 L30,46" stroke="rgba(255,255,255,.2)" stroke-width="1.5" fill="none"/><path d="M30,26 L22,22" stroke="rgba(255,255,255,.2)" stroke-width="1.5" fill="none"/><path d="M30,36 L38,32" stroke="rgba(255,255,255,.2)" stroke-width="1.5" fill="none"/></svg><span class="discount-badge">-35%</span></div>
+            <div class="product-info"><span class="product-category">Jardim</span><h3>Substrato Premium</h3><span class="old-price">R$ 34,90</span><span class="new-price">R$ 22,90</span><button class="btn-comprar">Comprar</button></div>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-arrow next" data-carousel="jardim" aria-label="Próximo"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M7 4L13 10L7 16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+    <div class="carousel-dots" id="dots-jardim"></div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="faq-section" id="faq">
+  <div class="container">
+    <h2>Perguntas Frequentes</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question"><span>Quando acontece a Black Friday Cobasi?</span><svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 7L10 13L15 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="faq-answer"><p>A Black Friday Cobasi acontece na última sexta-feira de novembro, mas as ofertas começam antes! Fique de olho em nosso site e redes sociais para não perder nenhuma promoção antecipada. Além disso, preparamos esquentas durante toda a semana com descontos progressivos.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question"><span>Os descontos valem para todas as categorias de pets?</span><svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 7L10 13L15 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="faq-answer"><p>Sim! Temos descontos em todas as categorias: cachorro, gato, aves, roedores, peixes, répteis e muito mais. Além de acessórios, brinquedos, rações e produtos de higiene, você encontra promoções em Casa &amp; Jardim, com itens para o lar e jardinagem.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question"><span>Tem frete grátis para rações?</span><svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 7L10 13L15 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="faq-answer"><p>Na Black Friday Cobasi, diversas rações e produtos acima de R$ 199 contam com frete grátis para todo o Brasil. Consulte as condições no carrinho de compras. Também oferecemos opção de retirada grátis em qualquer uma das nossas lojas.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question"><span>Posso parcelar minhas compras?</span><svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 7L10 13L15 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="faq-answer"><p>Sim! Parcele em até 10x sem juros no cartão de crédito. Também aceitamos Pix com desconto adicional de 5% durante a Black Friday, além de boleto bancário e carteiras digitais como as principais do mercado.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question"><span>Os produtos têm garantia de qualidade?</span><svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 7L10 13L15 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="faq-answer"><p>Todos os produtos comercializados pela Cobasi possuem garantia de qualidade e procedência. Trabalhamos apenas com marcas certificadas e aprovadas pelos órgãos competentes. Rações, medicamentos e suplementos passam por rigoroso controle de estoque e validade.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question"><span>Qual a política de troca e devolução?</span><svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 7L10 13L15 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="faq-answer"><p>Você tem até 30 dias para solicitar troca ou devolução de produtos não utilizados e em embalagem original. Para rações e produtos de saúde animal, consulte as condições específicas em nosso site. O processo pode ser iniciado online ou em qualquer loja física.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CATEGORY TEXT ===== -->
+<section class="cattext-section">
+  <div class="container">
+    <h2>Pet Shop Black Friday: tudo para seu pet com desconto</h2>
+    <div class="cattext-body">
+      <p>A Black Friday é a melhor oportunidade do ano para garantir tudo que seu pet precisa com descontos exclusivos. Na Cobasi, você encontra rações premium, brinquedos, acessórios, produtos de higiene e muito mais para cães, gatos, aves, roedores e peixes — tudo com preços que só aparecem uma vez por ano.</p>
+      <p>Com mais de 200 lojas espalhadas pelo Brasil e uma loja online completa, a Cobasi é a maior rede de pet shops do país. Durante a Black Friday, preparamos ofertas especiais em todas as categorias, desde rações das melhores marcas até acessórios exclusivos para deixar a vida do seu pet ainda mais confortável.</p>
+      <div class="cattext-hidden" id="cattext-hidden">
+        <p>Nossos especialistas selecionam os melhores produtos para garantir a saúde e o bem-estar do seu animal de estimação. Na seção de cães, você encontra rações premium e super premium, petiscos naturais, brinquedos interativos, camas ortopédicas, coleiras e muito mais. Para gatos, oferecemos areias sanitárias ecológicas, arranhadores, sachês gourmet e acessórios de enriquecimento ambiental.</p>
+        <p>Não esqueça de conferir também nossas seções de aves e roedores, com gaiolas, viveiros, rações específicas e acessórios, além de Casa &amp; Jardim, com tudo para cuidar do seu jardim e horta. Aproveite a Black Friday Cobasi e garanta os melhores produtos com os melhores preços do ano para seu companheiro.</p>
+      </div>
+      <button class="btn-ver-mais" id="btn-cattext">Ver mais</button>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="logo">cobasi</span>
+        <p>A melhor e mais completa pet shop do Brasil. Tudo para cães, gatos, aves, peixes e muito mais.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Categorias</h4>
+        <ul><li><a href="#">Cachorro</a></li><li><a href="#">Gato</a></li><li><a href="#">Aves</a></li><li><a href="#">Roedores</a></li><li><a href="#">Peixes</a></li><li><a href="#">Casa &amp; Jardim</a></li></ul>
+      </div>
+      <div class="footer-col">
+        <h4>Serviços</h4>
+        <ul><li><a href="#">Banho &amp; Tosa</a></li><li><a href="#">Veterinário</a></li><li><a href="#">Adoção</a></li><li><a href="#">Cobasi Assinatura</a></li></ul>
+      </div>
+      <div class="footer-col">
+        <h4>Institucional</h4>
+        <ul><li><a href="#">Sobre a Cobasi</a></li><li><a href="#">Nossas Lojas</a></li><li><a href="#">Trabalhe Conosco</a></li><li><a href="#">Blog</a></li></ul>
+      </div>
+    </div>
+    <div class="footer-badges">
+      <div class="footer-badge">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L3 6v6c0 3.5 3 6.5 7 8 4-1.5 7-4.5 7-8V6l-7-4z" stroke="var(--primary)" stroke-width="1.5" fill="none"/><path d="M7 10l2 2 4-4" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Compra segura</span>
+      </div>
+      <div class="footer-badge">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="8" width="12" height="8" rx="1.5" stroke="var(--primary)" stroke-width="1.5"/><path d="M14 10h2a2 2 0 012 2v2a2 2 0 01-2 2h-2" stroke="var(--primary)" stroke-width="1.5"/><circle cx="6" cy="16" r="1.5" stroke="var(--primary)" stroke-width="1.5"/><circle cx="16" cy="16" r="1.5" stroke="var(--primary)" stroke-width="1.5"/></svg>
+        <span>Entrega rápida</span>
+      </div>
+      <div class="footer-badge">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M2 5h16v10H2z" stroke="var(--primary)" stroke-width="1.5" rx="1.5"/><path d="M2 9h16" stroke="var(--primary)" stroke-width="1.5"/></svg>
+        <span>Frete grátis acima de R$ 199</span>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 Cobasi — Todos os direitos reservados. Página demonstrativa.</div>
+  </div>
+</footer>
+
+<!-- ===== MODAL ===== -->
+<div class="modal-overlay" id="modal">
+  <div class="modal-box">
+    <button class="modal-close" id="modal-close" aria-label="Fechar">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <h3>Quero ser avisado!</h3>
+    <p>Cadastre-se para receber as ofertas da Black Friday Cobasi em primeira mão.</p>
+    <form id="notify-form" onsubmit="return false">
+      <div class="form-row">
+        <div class="form-group"><label for="f-nome">Nome</label><input type="text" id="f-nome" placeholder="Seu nome"></div>
+        <div class="form-group"><label for="f-sobrenome">Sobrenome</label><input type="text" id="f-sobrenome" placeholder="Seu sobrenome"></div>
+      </div>
+      <div class="form-group"><label for="f-email">E-mail</label><input type="email" id="f-email" placeholder="seuemail@exemplo.com"></div>
+      <div class="form-group"><label for="f-celular">Celular</label><input type="tel" id="f-celular" placeholder="(11) 99999-9999"></div>
+      <button type="submit" class="btn-submit">Cadastrar</button>
+    </form>
+  </div>
+</div>
+
+<!-- ===== DEMO RIBBON ===== -->
+<div class="demo-ribbon">Preview <span>Layout Carrossel</span> — liveSEO · Página demonstrativa, sem dados reais</div>
+
+<script>
+(function(){
+  /* === COUNTDOWN === */
+  function initCountdown(){
+    var now=new Date();
+    var year=now.getFullYear();
+    var nov=new Date(year,10,1);
+    var dayOfWeek=nov.getDay();
+    var firstFri=dayOfWeek<=5?(5-dayOfWeek+1):(5+7-dayOfWeek+1);
+    var bf=new Date(year,10,firstFri+21);
+    if(bf<now){nov=new Date(year+1,10,1);dayOfWeek=nov.getDay();firstFri=dayOfWeek<=5?(5-dayOfWeek+1):(5+7-dayOfWeek+1);bf=new Date(year+1,10,firstFri+21)}
+    function tick(){
+      var diff=bf-new Date();
+      if(diff<0)diff=0;
+      var d=Math.floor(diff/864e5);
+      var h=Math.floor((diff%864e5)/36e5);
+      var m=Math.floor((diff%36e5)/6e4);
+      var s=Math.floor((diff%6e4)/1e3);
+      document.getElementById('cd-days').textContent=String(d).padStart(2,'0');
+      document.getElementById('cd-hours').textContent=String(h).padStart(2,'0');
+      document.getElementById('cd-mins').textContent=String(m).padStart(2,'0');
+      document.getElementById('cd-secs').textContent=String(s).padStart(2,'0');
+    }
+    tick();setInterval(tick,1000);
+  }
+
+  /* === MODAL === */
+  function initModal(){
+    var overlay=document.getElementById('modal');
+    document.getElementById('btn-avise').addEventListener('click',function(){overlay.classList.add('open')});
+    document.getElementById('modal-close').addEventListener('click',function(){overlay.classList.remove('open')});
+    overlay.addEventListener('click',function(e){if(e.target===overlay)overlay.classList.remove('open')});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape')overlay.classList.remove('open')});
+    document.getElementById('notify-form').addEventListener('submit',function(){
+      var btn=this.querySelector('.btn-submit');
+      btn.textContent='Cadastrado!';
+      btn.style.background='#7EB339';
+      setTimeout(function(){overlay.classList.remove('open');btn.textContent='Cadastrar';btn.style.background=''},2000);
+    });
+  }
+
+  /* === LOAD MORE === */
+  function initLoadMore(){
+    var btn=document.getElementById('btn-load-more');
+    btn.addEventListener('click',function(){
+      document.querySelectorAll('.hidden-card').forEach(function(c){c.classList.add('visible')});
+      btn.style.display='none';
+    });
+  }
+
+  /* === CAROUSEL === */
+  function initCarousel(name){
+    var section=document.getElementById('carousel-'+name);
+    var track=document.getElementById('track-'+name);
+    var dotsC=document.getElementById('dots-'+name);
+    var prevBtn=section.querySelector('.carousel-arrow.prev');
+    var nextBtn=section.querySelector('.carousel-arrow.next');
+    var cards=Array.from(track.children);
+    var gap=16;
+    var current=0;
+    var autoTimer;
+
+    function getVis(){
+      if(window.innerWidth>=1024)return 4;
+      if(window.innerWidth>=640)return 2;
+      return 1;
+    }
+    function getMax(){return Math.max(0,cards.length-getVis())}
+
+    function slide(){
+      var cw=cards[0].offsetWidth;
+      track.style.transform='translateX(-'+current*(cw+gap)+'px)';
+      renderDots();
+      prevBtn.disabled=current===0;
+      nextBtn.disabled=current>=getMax();
+    }
+
+    function renderDots(){
+      var max=getMax();
+      dotsC.innerHTML='';
+      for(var i=0;i<=max;i++){
+        var dot=document.createElement('button');
+        dot.className='carousel-dot'+(i===current?' active':'');
+        dot.setAttribute('aria-label','Slide '+(i+1));
+        (function(idx){dot.addEventListener('click',function(){current=idx;slide();resetAuto()})})(i);
+        dotsC.appendChild(dot);
+      }
+    }
+
+    function next(){current=current>=getMax()?0:current+1;slide()}
+    function prev(){current=current<=0?getMax():current-1;slide()}
+    function resetAuto(){clearInterval(autoTimer);autoTimer=setInterval(next,4000)}
+
+    prevBtn.addEventListener('click',function(){prev();resetAuto()});
+    nextBtn.addEventListener('click',function(){next();resetAuto()});
+
+    /* Touch / swipe */
+    var touchX=0;
+    var viewport=track.parentElement;
+    viewport.addEventListener('touchstart',function(e){touchX=e.changedTouches[0].screenX},{passive:true});
+    viewport.addEventListener('touchend',function(e){
+      var diff=touchX-e.changedTouches[0].screenX;
+      if(Math.abs(diff)>50){if(diff>0)next();else prev();resetAuto()}
+    });
+
+    /* Pause on hover */
+    section.addEventListener('mouseenter',function(){clearInterval(autoTimer)});
+    section.addEventListener('mouseleave',function(){resetAuto()});
+
+    window.addEventListener('resize',function(){if(current>getMax())current=getMax();slide()});
+
+    slide();
+    resetAuto();
+  }
+
+  /* === FAQ === */
+  function initFAQ(){
+    document.querySelectorAll('.faq-question').forEach(function(btn){
+      btn.addEventListener('click',function(){
+        var item=btn.parentElement;
+        var wasOpen=item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(function(i){i.classList.remove('open')});
+        if(!wasOpen)item.classList.add('open');
+      });
+    });
+  }
+
+  /* === CATEGORY TEXT === */
+  function initCatText(){
+    var btn=document.getElementById('btn-cattext');
+    var hidden=document.getElementById('cattext-hidden');
+    btn.addEventListener('click',function(){
+      var show=!hidden.classList.contains('visible');
+      hidden.classList.toggle('visible');
+      btn.textContent=show?'Ver menos':'Ver mais';
+    });
+  }
+
+  /* === MOBILE MENU === */
+  function initMenu(){
+    var btn=document.getElementById('menu-btn');
+    var nav=document.getElementById('main-nav');
+    btn.addEventListener('click',function(){
+      var open=nav.classList.toggle('nav-mobile-open');
+      btn.setAttribute('aria-expanded',open);
+    });
+    nav.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click',function(){nav.classList.remove('nav-mobile-open');btn.setAttribute('aria-expanded','false')});
+    });
+  }
+
+  /* === INIT === */
+  document.addEventListener('DOMContentLoaded',function(){
+    initCountdown();
+    initModal();
+    initLoadMore();
+    ['cachorro','gato','aves','jardim'].forEach(initCarousel);
+    initFAQ();
+    initCatText();
+    initMenu();
+  });
+})();
+</script>
+</body>
+</html>
